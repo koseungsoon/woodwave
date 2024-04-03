@@ -1,6 +1,8 @@
 package com.woodwave.main;
 
 import com.woodwave.common.base.BaseController;
+import com.woodwave.goods.service.GoodsService;
+import com.woodwave.goods.vo.GoodsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
+
+import com.woodwave.common.base.BaseController;
+import com.woodwave.goods.service.GoodsService;
+import com.woodwave.goods.vo.GoodsVO;
 
 @Controller("mainController")
 @EnableAspectJAutoProxy
@@ -30,8 +36,7 @@ public class MainController extends BaseController {
 
         session=request.getSession();
         session.setAttribute("side_menu", "user");
-        Map<String, List<GoodsVO>> goodsMap=goodsService.listGoods();
-        mav.addObject("goodsMap", goodsMap);
+
         return mav;
     }
 
