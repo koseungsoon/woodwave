@@ -1,5 +1,8 @@
 package com.woodwave.goods.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class GoodsVO {
 
     //필드

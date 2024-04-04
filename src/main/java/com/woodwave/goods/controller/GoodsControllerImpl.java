@@ -3,6 +3,7 @@ package com.woodwave.goods.controller;
 import com.woodwave.common.base.BaseController;
 import com.woodwave.goods.service.GoodsService;
 import com.woodwave.goods.vo.GoodsVO;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller("goodsController")
 @RequestMapping(value="/goods")
+@Log4j2
 public class GoodsControllerImpl extends BaseController implements GoodsController {
     @Autowired
     private GoodsService goodsService;
@@ -20,9 +22,11 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
     private GoodsVO goodsVO;
 
     @Override
+    @RequestMapping(value="/listGoods.do")
     public ModelAndView listGoods(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        log.info("listGoods 들어옴");
         ModelAndView mav=new ModelAndView();
-
+        mav.setViewName("goodsList");
         return mav;
     }
 
