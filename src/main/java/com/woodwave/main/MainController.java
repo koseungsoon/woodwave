@@ -3,6 +3,7 @@ package com.woodwave.main;
 import com.woodwave.common.base.BaseController;
 import com.woodwave.goods.service.GoodsService;
 import com.woodwave.goods.vo.GoodsVO;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import com.woodwave.goods.service.GoodsService;
 import com.woodwave.goods.vo.GoodsVO;
 
 @Controller("mainController")
+@Log4j2
 @EnableAspectJAutoProxy
 public class MainController extends BaseController {
 
@@ -29,15 +31,49 @@ public class MainController extends BaseController {
 
     @RequestMapping(value= "/main/main.do" ,method={RequestMethod.POST,RequestMethod.GET})
     public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception{
-        HttpSession session;
+        log.info("main 들어옴");
         ModelAndView mav=new ModelAndView();
-        String viewName=(String)request.getAttribute("viewName");
+        String viewName = getViewName(request);
+        log.info("viewName: "+ viewName);
+
+
+
         mav.setViewName(viewName);
-
-        session=request.getSession();
-        session.setAttribute("side_menu", "user");
-
+        List goodsList = goodsService.listGoods();
+        mav.addObject("goodsList",goodsList);
+        log.info(mav);
         return mav;
-    }
 
+
+    }
+    private String getViewName(HttpServletRequest request) throws Exception {
+        String contextPath = request.getContextPath();
+        String uri = (String) request.getAttribute("javax.servlet.include.request_uri");
+        if (uri == null || uri.trim().equals("")) {
+            uri = request.getRequestURI();
+        }
+
+        int begin = 0;
+        if (!((contextPath == null) || ("".equals(contextPath)))) {
+            begin = contextPath.length();
+        }
+
+        int end;
+        if (uri.indexOf(";") != -1) {
+            end = uri.indexOf(";");
+        } else if (uri.indexOf("?") != -1) {
+            end = uri.indexOf("?");
+        } else {
+            end = uri.length();
+        }
+
+        String viewName = uri.substring(begin, end);
+        if (viewName.indexOf(".") != -1) {
+            viewName = viewName.substring(0, viewName.lastIndexOf("."));
+        }
+        if (viewName.lastIndexOf("/") != -1) {
+            viewName = viewName.substring(viewName.lastIndexOf("/", 1), viewName.length());
+        }
+        return viewName;
+    }
 }

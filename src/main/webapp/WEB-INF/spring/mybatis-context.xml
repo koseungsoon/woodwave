@@ -17,8 +17,8 @@
 		<property name="driver"
 			value="org.mariadb.jdbc.Driver" />
 		<property name="url" value="jdbc:mariadb://localhost:3307/woodwave" />
-		<property name="username" value="kss" />
-		<property name="password" value="1234" />
+		<property name="username" value="root" />
+		<property name="password" value="12341234" />
 	</bean>
 
 	<bean id ="sqlSessionFactory" class= "org.mybatis.spring.SqlSessionFactoryBean" >

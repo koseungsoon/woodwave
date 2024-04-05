@@ -12,6 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.woodwave.common.interceptor.ViewNameInterceptor;
+
+import java.util.List;
+
 @Controller("goodsController")
 @RequestMapping(value="/goods")
 @Log4j2
@@ -21,12 +25,22 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
     @Autowired
     private GoodsVO goodsVO;
 
+    private ViewNameInterceptor viewNameInterceptor;
     @Override
     @RequestMapping(value="/listGoods.do")
     public ModelAndView listGoods(HttpServletRequest request, HttpServletResponse response) throws Exception {
         log.info("listGoods 들어옴");
+
         ModelAndView mav=new ModelAndView();
-        mav.setViewName("goodsList");
+        String viewName = getViewName(request);
+        log.info("viewName: "+ viewName);
+
+
+
+        mav.setViewName(viewName);
+        List goodsList = goodsService.listGoods();
+        mav.addObject("goodsList",goodsList);
+        log.info(mav);
         return mav;
     }
 
@@ -44,4 +58,38 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 //    public ModelAndView searchGoods(String searchWord, HttpServletRequest request, HttpServletResponse response) throws Exception {
 //        return null;
 //    }
+
+
+
+    private String getViewName(HttpServletRequest request) throws Exception {
+        String contextPath = request.getContextPath();
+        String uri = (String) request.getAttribute("javax.servlet.include.request_uri");
+        if (uri == null || uri.trim().equals("")) {
+            uri = request.getRequestURI();
+        }
+
+        int begin = 0;
+        if (!((contextPath == null) || ("".equals(contextPath)))) {
+            begin = contextPath.length();
+        }
+
+        int end;
+        if (uri.indexOf(";") != -1) {
+            end = uri.indexOf(";");
+        } else if (uri.indexOf("?") != -1) {
+            end = uri.indexOf("?");
+        } else {
+            end = uri.length();
+        }
+
+        String viewName = uri.substring(begin, end);
+        if (viewName.indexOf(".") != -1) {
+            viewName = viewName.substring(0, viewName.lastIndexOf("."));
+        }
+        if (viewName.lastIndexOf("/") != -1) {
+            viewName = viewName.substring(viewName.lastIndexOf("/", 1), viewName.length());
+        }
+        return viewName;
+    }
+
 }
