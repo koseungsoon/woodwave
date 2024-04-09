@@ -3,6 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/woodwave/common/base/BaseController.java" charset="EUC-KR" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/woodwave/common/file/FileDownloadController.java" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/woodwave/common/interceptor/ViewNameInterceptor.java" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/woodwave/common/log/LoggingAdvice.java" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/woodwave/goods/controller/GoodsController.java" charset="EUC-KR" />
@@ -11,5 +12,6 @@
     <file url="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/spring" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views" charset="EUC-KR" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/resources/image" charset="EUC-KR" />
   </component>
 </project>

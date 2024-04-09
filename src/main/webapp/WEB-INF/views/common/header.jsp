@@ -10,7 +10,7 @@
 <body>
 	<div id="logo">
 	<a href="${contextPath}/main/main.do">
-		<img width="176" height="80" alt="booktopia" src="${contextPath}/resources/image/Booktopia_Logo.jpg">
+		<img width="150" height="120" alt="booktopia" src="${contextPath}/resources/image/woodwave_logo.jpg">
 		</a>
 	</div>
 	<div id="head_link">

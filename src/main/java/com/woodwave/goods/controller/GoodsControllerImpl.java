@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.woodwave.common.interceptor.ViewNameInterceptor;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller("goodsController")
 @RequestMapping(value="/goods")
@@ -30,7 +31,6 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
     @RequestMapping(value="/listGoods.do")
     public ModelAndView listGoods(HttpServletRequest request, HttpServletResponse response) throws Exception {
         log.info("listGoods 들어옴");
-
         ModelAndView mav=new ModelAndView();
         String viewName = getViewName(request);
         log.info("viewName: "+ viewName);
@@ -38,8 +38,10 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 
 
         mav.setViewName(viewName);
-        List goodsList = goodsService.listGoods();
-        mav.addObject("goodsList",goodsList);
+//        List goodsList = goodsService.listGoods();
+        Map<String,List<GoodsVO>> goodsMap = (Map<String, List<GoodsVO>>) goodsService.listGoods();
+//        mav.addObject("goodsList",goodsList);
+        mav.addObject("goodsMap",goodsMap);
         log.info(mav);
         return mav;
     }

@@ -12,6 +12,9 @@ public class GoodsVO {
     private String goods_title;
     private String goods_info;
     private int goods_sales_price;
+
+    private String goods_fileName;
+
     private int goods_delivery_price;
     private String goods_size;
     private int goods_leadtime;
@@ -22,6 +25,19 @@ public class GoodsVO {
     }
 
     //메서드
+
+
+    public String getGoods_fileName() {
+        return goods_fileName;
+    }
+
+    public void setGoods_fileName(String goods_fileName) {
+        this.goods_fileName = goods_fileName;
+    }
+
+
+
+
 
 
     public int getGoods_id() {

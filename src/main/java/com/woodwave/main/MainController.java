@@ -39,8 +39,10 @@ public class MainController extends BaseController {
 
 
         mav.setViewName(viewName);
-        List goodsList = goodsService.listGoods();
-        mav.addObject("goodsList",goodsList);
+//        List goodsList = goodsService.listGoods();
+        Map<String,List<GoodsVO>> goodsMap = (Map<String, List<GoodsVO>>) goodsService.listGoods();
+//        mav.addObject("goodsList",goodsList);
+        mav.addObject("goodsMap",goodsMap);
         log.info(mav);
         return mav;
 
