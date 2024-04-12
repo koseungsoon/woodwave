@@ -76,6 +76,9 @@ public class MemberControllerImpl implements  MemberController{
     public ResponseEntity addMember(@ModelAttribute("memberVO") MemberVO _memberVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
         response.setContentType("text/html; charset=UTF-8");
         request.setCharacterEncoding("utf-8");
+
+        log.info("회원가입하려는아이디: "+_memberVO);
+
         String message = null;
         ResponseEntity resEntity = null;
         HttpHeaders responseHeaders = new HttpHeaders();
@@ -100,9 +103,9 @@ public class MemberControllerImpl implements  MemberController{
 
     @Override
     @RequestMapping(value="/overlapped.do" ,method = RequestMethod.POST)
-    public ResponseEntity overlapped(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ResponseEntity overlapped(@RequestParam("member_id") String member_id, HttpServletRequest request, HttpServletResponse response) throws Exception {
         ResponseEntity resEntity = null;
-        String result = memberService.overlapped(id);
+        String result = memberService.overlapped(member_id);
         resEntity =new ResponseEntity(result, HttpStatus.OK);
         return resEntity;
     }

@@ -12,8 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.woodwave.common.interceptor.ViewNameInterceptor;
-
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +24,7 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
     @Autowired
     private GoodsVO goodsVO;
 
-    private ViewNameInterceptor viewNameInterceptor;
+//    private ViewNameInterceptor viewNameInterceptor;
     @Override
     @RequestMapping(value="/listGoods.do")
     public ModelAndView listGoods(HttpServletRequest request, HttpServletResponse response) throws Exception {

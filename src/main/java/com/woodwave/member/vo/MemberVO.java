@@ -113,4 +113,9 @@ public class MemberVO {
     public void setMember_del_yn(String member_del_yn) {
         this.member_del_yn = member_del_yn;
     }*/
+
+    @Override
+    public String toString() {
+        return member_id;
+    }
 }

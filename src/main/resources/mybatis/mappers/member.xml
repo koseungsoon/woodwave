@@ -5,7 +5,7 @@
 
 <mapper namespace="mapper.member">
 <!-- 리절트 맵 정의 -->	
-	<resultMap id="memberResult" type="MemberVO">
+	<resultMap id="memberResult" type="memberVO">
 		<result property="member_id" column="member_id" />
 		<result property="member_pwd" column="member_pwd" />
 		<result property="member_name" column="member_name" />

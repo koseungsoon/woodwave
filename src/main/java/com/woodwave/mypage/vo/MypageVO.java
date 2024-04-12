@@ -1,5 +1,8 @@
 package com.woodwave.mypage.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class MypageVO {
 
     private String member_id;

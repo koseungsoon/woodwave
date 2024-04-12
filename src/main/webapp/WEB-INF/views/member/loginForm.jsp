@@ -32,7 +32,7 @@ function result(){
 				</TR>
 				<TR class="solid_line">
 					<TD class="fixed_join">비밀번호</TD>
-					<TD><input name="member_pw" type="password" size="20" /></TD>
+					<TD><input name="member_pwd" type="password" size="20" /></TD>
 				</TR>
 			</TBODY>
 		</TABLE>

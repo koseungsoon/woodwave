@@ -8,10 +8,11 @@
 <head>
     <meta charset="utf-8">
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+    <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
 
 
-        /*function execDaumPostcode() {
+        function execDaumPostcode() {
           new daum.Postcode({
             oncomplete: function(data) {
               // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -60,10 +61,12 @@
 
             }
           }).open();
-        }*/
+        }
+        //아이디중복체크 참고
+        //https://velog.io/@vipstar-_-/Spring-%EC%8B%A4%EC%8B%9C%EA%B0%84-%EC%95%84%EC%9D%B4%EB%94%94-%EC%A4%91%EB%B3%B5%EC%B2%B4%ED%81%AC-ajax
 
         function fn_overlapped() {
-            var _id = $("#_member_id").val();
+            var _id = $("#member_id").val();
             if (_id == '') {
                 alert("ID를 입력하세요");
                 return;
@@ -78,7 +81,7 @@
                     if (data == 'false') {
                         alert("사용할 수 있는 ID입니다.");
                         $('#btnOverlapped').prop("disabled", true);
-                        $('#_member_id').prop("disabled", true);
+                        $('#member_id').prop("disabled", true);
                         $('#member_id').val(_id);
                     } else {
                         alert("사용할 수 없는 ID입니다.");
@@ -86,7 +89,7 @@
                 },
                 error: function (data, textStatus) {
                     alert("에러가 발생했습니다.");
-                    ㅣ
+
                 },
                 complete: function (data, textStatus) {
                     //alert("작업을완료 했습니다");
@@ -96,6 +99,7 @@
     </script>
 </head>
 <body>
+${contextPath}
 <h3>필수입력사항</h3>
 <form action="${contextPath}/member/addMember.do" method="post">
     <div id="detail_table">
@@ -104,8 +108,8 @@
             <tr class="dot_line">
                 <td class="fixed_join">아이디</td>
                 <td>
-                    <input type="text" name="_member_id" id="_member_id" size="20"/>
-                    <input type="hidden" name="member_id" id="member_id"/>
+                    <input type="text" name="member_id" id="member_id" size="20"/>
+<%--                    <input type="hidden" name="member_id" id="member_id"/>--%>
 
                     <input type="button" id="btnOverlapped" value="중복체크" onClick="fn_overlapped()"/>
                 </td>

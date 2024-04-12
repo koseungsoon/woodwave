@@ -1,5 +1,9 @@
 package com.woodwave.cart.vo;
 
+
+import org.springframework.stereotype.Component;
+
+@Component
 public class CartVO {
 
 

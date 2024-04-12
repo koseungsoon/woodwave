@@ -7,9 +7,9 @@
     <typeAlias type="com.woodwave.goods.vo.GoodsVO" alias="goodsVO" />
     <typeAlias type="com.woodwave.goods.vo.ImageFileVO" alias="imageFileVO" />
     <typeAlias type="com.woodwave.member.vo.MemberVO" alias="memberVO" />
-    <!--<typeAlias type="com.woodwave.cart.vo.CartVO" alias="cartVO" />
-   <typeAlias type="com.woodwave.order.vo.OrderVO" alias="orderVO" />
-    <typeAlias type="com.woodwave.mypage.vo.MyPageVO" alias="mypageVO" />-->
+    <typeAlias type="com.woodwave.cart.vo.CartVO" alias="cartVO" />
+    <typeAlias type="com.woodwave.order.vo.OrderVO" alias="orderVO" />
+    <typeAlias type="com.woodwave.mypage.vo.MypageVO" alias="mypageVO" />
     
   </typeAliases>
 </configuration>

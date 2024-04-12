@@ -23,10 +23,13 @@ public class OrderVO {
     private String card_company;
     private Date pay_order_time;
 
+    private String goods_fileName;
+
+
     public OrderVO() {
     }
 
-    public OrderVO(int order_sec_num, int order_id, int goods_id, String goods_title, int goods_sales_price, int order_goods_qty, String delivery_state, String member_id, String member_phone, String receiver_name, String receiver_phone, String delivery_address, String pay_method, String card_company, Date pay_order_time) {
+    public OrderVO(int order_sec_num, int order_id, int goods_id, String goods_title, int goods_sales_price, int order_goods_qty, String delivery_state, String member_id, String member_phone, String receiver_name, String receiver_phone, String delivery_address, String pay_method, String card_company, Date pay_order_time,String goods_fileName) {
         this.order_sec_num = order_sec_num;
         this.order_id = order_id;
         this.goods_id = goods_id;
@@ -42,6 +45,15 @@ public class OrderVO {
         this.pay_method = pay_method;
         this.card_company = card_company;
         this.pay_order_time = pay_order_time;
+        this.goods_fileName = goods_fileName;
+    }
+
+    public String getGoods_fileName() {
+        return goods_fileName;
+    }
+
+    public void setGoods_fileName(String goods_fileName) {
+        this.goods_fileName = goods_fileName;
     }
 
     public int getOrder_sec_num() {
