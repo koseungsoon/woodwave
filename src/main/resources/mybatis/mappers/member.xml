@@ -36,6 +36,10 @@
 	   from t_shopping_member
 	   where member_id = #{member_id}
 	</select>
+
+	<select id="idCheck" parameterType="String" resultType="int">
+		select exists (select member_id from t_shopping_member where member_id = #{member_id});
+	</select>
 	
   <insert id="insertNewMember"  parameterType="memberVO">
   <![CDATA[

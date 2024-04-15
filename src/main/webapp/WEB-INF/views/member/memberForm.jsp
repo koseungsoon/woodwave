@@ -9,6 +9,20 @@
     <meta charset="utf-8">
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <style>
+        .id_ok{
+            color:#008000;
+            display: none;
+        }
+
+        .id_already{
+            color:#6A82FB;
+            display: none;
+        }
+    </style>
+
+
     <script>
 
 
@@ -65,37 +79,63 @@
         //아이디중복체크 참고
         //https://velog.io/@vipstar-_-/Spring-%EC%8B%A4%EC%8B%9C%EA%B0%84-%EC%95%84%EC%9D%B4%EB%94%94-%EC%A4%91%EB%B3%B5%EC%B2%B4%ED%81%AC-ajax
 
-        function fn_overlapped() {
-            var _id = $("#member_id").val();
-            if (_id == '') {
-                alert("ID를 입력하세요");
-                return;
-            }
+        <%--function fn_overlapped() {--%>
+        <%--    var _id = $("#member_id").val();--%>
+        <%--    if (_id == '') {--%>
+        <%--        alert("ID를 입력하세요");--%>
+        <%--        return;--%>
+        <%--    }--%>
+        <%--    $.ajax({--%>
+        <%--        type: "post",--%>
+        <%--        async: false,--%>
+        <%--        url: "${contextPath}/member/overlapped.do",--%>
+        <%--        dataType: "text",--%>
+        <%--        data: {id: _id},--%>
+        <%--        success: function (data, textStatus) {--%>
+        <%--            if (data == 'false') {--%>
+        <%--                alert("사용할 수 있는 ID입니다.");--%>
+        <%--                $('#btnOverlapped').prop("disabled", true);--%>
+        <%--                $('#member_id').prop("disabled", true);--%>
+        <%--                $('#member_id').val(_id);--%>
+        <%--            } else {--%>
+        <%--                alert("사용할 수 없는 ID입니다.");--%>
+        <%--            }--%>
+        <%--        },--%>
+        <%--        error: function (data, textStatus) {--%>
+        <%--            alert("에러가 발생했습니다.");--%>
+
+        <%--        },--%>
+        <%--        complete: function (data, textStatus) {--%>
+        <%--            //alert("작업을완료 했습니다");--%>
+        <%--        }--%>
+        <%--    });  //end ajax--%>
+        <%--}--%>
+
+
+       /* function checkId(){
+            var member_id = $('#member_id').val(); //id값이 "id"인 입력란의 값을 저장
             $.ajax({
-                type: "post",
-                async: false,
-                url: "${contextPath}/member/overlapped.do",
-                dataType: "text",
-                data: {id: _id},
-                success: function (data, textStatus) {
-                    if (data == 'false') {
-                        alert("사용할 수 있는 ID입니다.");
-                        $('#btnOverlapped').prop("disabled", true);
-                        $('#member_id').prop("disabled", true);
-                        $('#member_id').val(_id);
-                    } else {
-                        alert("사용할 수 없는 ID입니다.");
+                url:'${contextPath}/member/idCheck.do', //Controller에서 요청 받을 주소
+                type:'post', //POST 방식으로 전달
+                data:{member_id:member_id},
+                success:function(cnt){ //컨트롤러에서 넘어온 cnt값을 받는다
+                    if(cnt == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디
+                        $('.id_ok').css("display","inline-block");
+                        $('.id_already').css("display", "none");
+                    } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
+                        $('.id_already').css("display","inline-block");
+                        $('.id_ok').css("display", "none");
+                        // alert("아이디를 다시 입력해주세요");
+                        $('#id').val('');
                     }
                 },
-                error: function (data, textStatus) {
-                    alert("에러가 발생했습니다.");
-
-                },
-                complete: function (data, textStatus) {
-                    //alert("작업을완료 했습니다");
+                error:function(){
+                    alert("에러입니다");
                 }
-            });  //end ajax
-        }
+            });
+        };*/
+
+
     </script>
 </head>
 <body>
@@ -106,12 +146,20 @@ ${contextPath}
         <table>
             <tbody>
             <tr class="dot_line">
-                <td class="fixed_join">아이디</td>
+<%--                <td class="fixed_join">아이디</td>--%>
+    <label >아이디#</label>
                 <td>
-                    <input type="text" name="member_id" id="member_id" size="20"/>
+<%--                    <input type="text" name="member_id" id="member_id" size="20"/>--%>
+
+    <input type="text" id="member_id" name="member_id" oninput = "checkId()" >
+
+                    <!-- id ajax 중복체크 -->
+                    <span class="id_ok">사용 가능한 아이디입니다.</span>
+                    <span class="id_already">누군가 이 아이디를 사용하고 있어요.</span>
+
 <%--                    <input type="hidden" name="member_id" id="member_id"/>--%>
 
-                    <input type="button" id="btnOverlapped" value="중복체크" onClick="fn_overlapped()"/>
+<%--                    <input type="button" id="btnOverlapped" value="중복체크" onClick="fn_overlapped()"/>--%>
                 </td>
             </tr>
             <tr class="dot_line">

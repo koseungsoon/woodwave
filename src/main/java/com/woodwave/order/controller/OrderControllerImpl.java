@@ -6,6 +6,7 @@ import com.woodwave.member.vo.MemberVO;
 import com.woodwave.order.service.OrderService;
 import com.woodwave.order.vo.OrderVO;
 import com.woodwave.order.vo.OrderVO;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+@Log4j2
 @Controller("orderController")
 @RequestMapping(value="/order")
 public class OrderControllerImpl extends BaseController implements OrderController {
@@ -32,7 +33,9 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 	@RequestMapping(value="/orderEachGoods.do" ,method = RequestMethod.POST)
 	public ModelAndView orderEachGoods(@ModelAttribute("orderVO") OrderVO _orderVO,
 			                       HttpServletRequest request, HttpServletResponse response)  throws Exception{
-		
+
+		log.info("컨트롤러 orderEachGoods.do 들어옴");
+
 		request.setCharacterEncoding("utf-8");
 		HttpSession session=request.getSession();
 		session=request.getSession();
@@ -54,8 +57,8 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 				 orderVO=_orderVO;
 			 }
 		 }
-		
-		String viewName=(String)request.getAttribute("viewName");
+		String viewName = getViewName(request);
+		log.info("viewName: "+viewName);
 		ModelAndView mav = new ModelAndView(viewName);
 		
 		List myOrderList=new ArrayList<OrderVO>();
@@ -144,6 +147,37 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 		mav.addObject("myOrderList", myOrderList);
 		return mav;
 	}
-	
+
+
+	private String getViewName(HttpServletRequest request) throws Exception {
+		String contextPath = request.getContextPath();
+		String uri = (String) request.getAttribute("javax.servlet.include.request_uri");
+		if (uri == null || uri.trim().equals("")) {
+			uri = request.getRequestURI();
+		}
+
+		int begin = 0;
+		if (!((contextPath == null) || ("".equals(contextPath)))) {
+			begin = contextPath.length();
+		}
+
+		int end;
+		if (uri.indexOf(";") != -1) {
+			end = uri.indexOf(";");
+		} else if (uri.indexOf("?") != -1) {
+			end = uri.indexOf("?");
+		} else {
+			end = uri.length();
+		}
+
+		String viewName = uri.substring(begin, end);
+		if (viewName.indexOf(".") != -1) {
+			viewName = viewName.substring(0, viewName.lastIndexOf("."));
+		}
+		if (viewName.lastIndexOf("/") != -1) {
+			viewName = viewName.substring(viewName.lastIndexOf("/", 1), viewName.length());
+		}
+		return viewName;
+	}
 
 }

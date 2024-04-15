@@ -12,7 +12,7 @@ public interface GoodsController {
 
 	public ModelAndView listGoods(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView menuGoods(@RequestParam("goods_sort") String goods_id,HttpServletRequest request, HttpServletResponse response) throws Exception;
-//	public ModelAndView goodsDetail(@RequestParam("goods_id") String goods_id,HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView goodsDetail(@RequestParam("goods_id") String goods_id,HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 //	public ModelAndView searchGoods(@RequestParam("searchWord") String searchWord,HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

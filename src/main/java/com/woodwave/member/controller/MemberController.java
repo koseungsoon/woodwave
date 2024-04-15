@@ -24,4 +24,7 @@ public interface MemberController {
     public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response) throws Exception;
     public ModelAndView memberForm(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
+    public int idCheck(@RequestParam("member_id") String id) throws Exception;
+
+
 }

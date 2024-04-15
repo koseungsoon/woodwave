@@ -2,6 +2,7 @@ package com.woodwave.goods.service;
 
 import com.woodwave.goods.dao.GoodsDAO;
 import com.woodwave.goods.vo.GoodsVO;
+import com.woodwave.goods.vo.ImageFileVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +34,15 @@ public class GoodsServiceImpl implements GoodsService{
         goodsList=goodsDAO.selectGoodsMenu();
 
         return goodsList;
+    }
+
+    @Override
+    public Map goodsDetail(String _goods_id) throws Exception {
+        Map goodsMap=new HashMap();
+        GoodsVO goodsVO = goodsDAO.selectGoodsDetail(_goods_id);
+        goodsMap.put("goodsVO", goodsVO);
+        List<ImageFileVO> imageList =goodsDAO.selectGoodsDetailImage(_goods_id);
+        goodsMap.put("imageList", imageList);
+        return goodsMap;
     }
 }
