@@ -6,7 +6,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 
+<style>
+	#sort{
+		list-style: none;
 
+	}
+</style>
 <body>
 	<div id="logo">
 	<a href="${contextPath}/main/main.do">
@@ -44,5 +49,15 @@
    <div id="suggest">
         <div id="suggestList"></div>
    </div>
+
+	<div id="sort">
+		<ul>
+			<a href="#"><li>Best Item</li></a>
+			<a href="#"><li>New Item</li></a>
+				<a href="#"><li>거실가구</li></a>
+					<a href="#"><li>주방가구</li></a>
+
+		</ul>
+	</div>
 </body>
 </html>

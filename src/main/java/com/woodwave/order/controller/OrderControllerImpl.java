@@ -36,7 +36,7 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 
 		log.info("컨트롤러 orderEachGoods.do 들어옴");
 
-		request.setCharacterEncoding("utf-8");
+
 		HttpSession session=request.getSession();
 		session=request.getSession();
 		
